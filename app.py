@@ -289,7 +289,7 @@ def generate_diagram():
                 resource_map[source] >> resource_map[target]
 
     image_url = url_for('static', filename='diagram.png', _external=True)
-    return jsonify({"message": "Diagram generated successfully", "image_url": image_url}), 200
+    return jsonify({"message": "Diagrama generado con éxito", "image_url": image_url}), 200
 
 @app.route('/download-diagram')
 def download_diagram():
@@ -299,4 +299,3 @@ if __name__ == '__main__':
     if not os.path.exists('static'):
         os.makedirs('static')
     app.run(debug=True)
-    
