@@ -19,7 +19,7 @@ from diagrams.azure.web import APIConnections, AppServiceCertificates, AppServic
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "https://bryanbjg.github.io/azure-diagram-ui"]}})  # Permitir CORS solo desde tu dominio
+CORS(app)  # Habilita CORS
 
 # Mapa de recursos actualizado
 RESOURCE_MAP = {
@@ -262,7 +262,7 @@ def generate_diagram():
     clusters = data.get('clusters', [])
 
     if not resources and not clusters:
-        return jsonify({"message": "No se proporcionaron recursos ni clusters", "image_url": ""}), 400
+        return jsonify({"message": "No resources or clusters provided", "image_url": ""}), 400
 
     resource_map = {}
 
@@ -289,7 +289,7 @@ def generate_diagram():
                 resource_map[source] >> resource_map[target]
 
     image_url = url_for('static', filename='diagram.png', _external=True)
-    return jsonify({"message": "Diagrama generado exitosamente", "image_url": image_url}), 200
+    return jsonify({"message": "Diagram generated successfully", "image_url": image_url}), 200
 
 @app.route('/download-diagram')
 def download_diagram():
