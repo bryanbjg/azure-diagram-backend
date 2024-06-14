@@ -19,7 +19,7 @@ from diagrams.azure.web import APIConnections, AppServiceCertificates, AppServic
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "https://bryanbjg.github.io/azure-diagram-ui/"]}})  # Permitir CORS solo desde tu dominio
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200", "https://bryanbjg.github.io/azure-diagram-ui"]}})  # Permitir CORS solo desde tu dominio
 
 # Mapa de recursos actualizado
 RESOURCE_MAP = {
