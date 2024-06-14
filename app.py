@@ -19,7 +19,7 @@ from diagrams.azure.web import APIConnections, AppServiceCertificates, AppServic
 import os
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Mapa de recursos actualizado
 RESOURCE_MAP = {
@@ -251,8 +251,7 @@ def index():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/generate-diagram', methods=['POST'])
 def generate_diagram():
@@ -289,7 +288,7 @@ def generate_diagram():
                 resource_map[source] >> resource_map[target]
 
     image_url = url_for('static', filename='diagram.png', _external=True)
-    return jsonify({"message": "Diagrama generado con éxito", "image_url": image_url}), 200
+    return jsonify({"message": "Diagrama generado con éxito.", "image_url": image_url}), 200
 
 @app.route('/download-diagram')
 def download_diagram():
